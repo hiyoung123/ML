@@ -56,48 +56,48 @@ class MyLinearRegression(object):
     def get_interpcet(self):
         return self.theta[-1]
 
-    if __name__ == '__main__':
-        # 读数据
-        data_file = "../Advertising.csv"
-        data = pd.read_csv(open(data_file))
+if __name__ == '__main__':
+    # 读数据
+    data_file = "../Advertising.csv"
+    data = pd.read_csv(open(data_file))
 
-        x = data[['TV', 'Radio', 'Newspaper']]
-        y = data['Sales']
-        
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=1)
+    x = data[['TV', 'Radio', 'Newspaper']]
+    y = data['Sales']
 
-        lr = LinearRegression()
-        mlr = MyLinearRegression()
-        ridge = Ridge()
-        lasso = Lasso()
-        lr.fit(x_train, y_train)
-        mlr.fit(x_train, y_train, alpha=0.000009, iters=20)
-        ridge.fit(x_train, y_train)
-        lasso.fit(x_train, y_train)
-        #获取各个模型参数
-        print('lr weights:', lr.coef_, ' intercept:', lr.intercept_)
-        print('mlr weights:', mlr.get_weight(), ' intercept:', mlr.get_interpcet())
-        print('lasso weights:', lasso.coef_, ' intercept:', lasso.intercept_)
-        print('ridge weights:', ridge.coef_, ' intercept:', ridge.intercept_)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=1)
 
-        lr_pre_test = lr.predict(x_test)
-        mlr_pre_test = mlr.predict(x_test)
-        lasso_pre_test = lasso.predict(x_test)
-        ridge_pre_test = ridge.predict(x_test)
-        #计算平方误差
-        print('mlr error:', np.average((mlr_pre_test - np.array(y_test)) ** 2))
-        print('lr error:', np.average((lr_pre_test - np.array(y_test)) ** 2))
-        print('lasso error:', np.average((lasso_pre_test - np.array(y_test)) ** 2))
-        print('ridge error:', np.average((ridge_pre_test - np.array(y_test)) ** 2))
-        #对比图像
-        plt.figure(facecolor='w', figsize=(12, 6))
-        t = np.arange(len(x_test))
-        plt.plot(t, lr_pre_test, 'g-', label=u'LR预测数据')
-        plt.plot(t, y_test, 'r-', label=u'真实数据')
-        plt.plot(t, mlr_pre_test, 'b-', label=u'MLR预测数据')
-        plt.plot(t, lasso_pre_test, 'k-', label=u'lasso预测数据')
-        plt.plot(t, ridge_pre_test, 'm-', label=u'ridge预测数据')
-        plt.legend(loc='lower right')
-        plt.title(u'线性回归')
-        plt.grid()
-        plt.show()
+    lr = LinearRegression()
+    mlr = MyLinearRegression()
+    ridge = Ridge()
+    lasso = Lasso()
+    lr.fit(x_train, y_train)
+    mlr.fit(x_train, y_train, alpha=0.000009, iters=20)
+    ridge.fit(x_train, y_train)
+    lasso.fit(x_train, y_train)
+    #获取各个模型参数
+    print('lr weights:', lr.coef_, ' intercept:', lr.intercept_)
+    print('mlr weights:', mlr.get_weight(), ' intercept:', mlr.get_interpcet())
+    print('lasso weights:', lasso.coef_, ' intercept:', lasso.intercept_)
+    print('ridge weights:', ridge.coef_, ' intercept:', ridge.intercept_)
+
+    lr_pre_test = lr.predict(x_test)
+    mlr_pre_test = mlr.predict(x_test)
+    lasso_pre_test = lasso.predict(x_test)
+    ridge_pre_test = ridge.predict(x_test)
+    #计算平方误差
+    print('mlr error:', np.average((mlr_pre_test - np.array(y_test)) ** 2))
+    print('lr error:', np.average((lr_pre_test - np.array(y_test)) ** 2))
+    print('lasso error:', np.average((lasso_pre_test - np.array(y_test)) ** 2))
+    print('ridge error:', np.average((ridge_pre_test - np.array(y_test)) ** 2))
+    #对比图像
+    plt.figure(facecolor='w', figsize=(12, 6))
+    t = np.arange(len(x_test))
+    plt.plot(t, lr_pre_test, 'g-', label=u'LR预测数据')
+    plt.plot(t, y_test, 'r-', label=u'真实数据')
+    plt.plot(t, mlr_pre_test, 'b-', label=u'MLR预测数据')
+    plt.plot(t, lasso_pre_test, 'k-', label=u'lasso预测数据')
+    plt.plot(t, ridge_pre_test, 'm-', label=u'ridge预测数据')
+    plt.legend(loc='lower right')
+    plt.title(u'线性回归')
+    plt.grid()
+    plt.show()
