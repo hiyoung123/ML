@@ -189,5 +189,5 @@ if __name__ == "__main__":
     plt.ylim((x2_min, x2_max))
     plt.grid(True)
 
-    plt.suptitle(u'数据分布对KMeans聚类的影响', fontsize=18)
+    plt.suptitle(u'聚类算法对比结果', fontsize=18)
     plt.show()
